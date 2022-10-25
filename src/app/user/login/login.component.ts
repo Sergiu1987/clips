@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
   };
-
   showAlert = false;
   alertMsg = 'Please wait! We are logging you in.';
   alertColor = 'blue';
@@ -29,19 +28,20 @@ export class LoginComponent implements OnInit {
 
     try {
       await this.auth.signInWithEmailAndPassword(
-        this.credentials.email as string,
-        this.credentials.password as string
+        this.credentials.email,
+        this.credentials.password
       );
-    } catch (err) {
+    } catch (e) {
       this.inSubmission = false;
       this.alertMsg = 'An unexpected error occurred. Please try again later.';
       this.alertColor = 'red';
 
-      console.error(err);
+      console.log(e);
 
       return;
     }
-    this.alertMsg = 'Success! You are now logged in successfully.';
+
+    this.alertMsg = 'Success! You are now logged in.';
     this.alertColor = 'green';
   }
 }
